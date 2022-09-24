@@ -1,0 +1,93 @@
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOME</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+
+<body>
+  <div id="theme">
+    <h1>Paper-Ganbaru</h1>
+  </div>
+
+  <div class="welcome">
+    <a href="/"><button id="logout" class="material-icons">ログアウト</button></a>
+    <p class="wel">ようこそ!{{ name }}さん</p>
+    <a href="/detail/{{ name }}"><button id="index_schedule" class="material-icons">スケジュール</button></a>
+
+  </div>
+
+  <div id="carenders" class="flatpickr input-group" data-id="strap">
+    <form id="forms" action="" method="POST">
+      <input id="date" name="time" type="text" placeholder="2020/12/12..." data-input><!-- カレンダー -->
+      <p id="kuhaku"></p>
+      <a class="input-button" title="toggle" data-toggle>
+        <i class="material-icons">カレンダー表示</i>
+      </a>
+      <a class="input-button" title="clear" data-clear>
+        <i class="material-icons">削除</i>
+      </a>
+      <input id="mi" type="submit" value="送信" name="timesubmit">
+    </form>
+  </div>
+  <p id="test"></p>
+  <!--判定結果表示-->
+
+  <!--<h1 id="sample"></h1>デバッグ用-->
+
+  <select id="selecter">
+    <option selected></option>
+    {% for user in users %}
+    <option>
+      {{ user.time.year }}-{{ user.time.month }}-{{ user.time.day }} {{ user.time.hour }}:{{ user.time.minute
+      }}{{ user.time.minute }}
+    </option>
+    {% endfor %}
+  </select>
+
+</body>
+<script>
+  const config = {
+    enableTime: true,   // 時間の選択可否
+    Calendar: true,   // カレンダー非表示
+    dateFormat: "Y-m-d H:i",  // 表示フォーマット
+    disableMobile: true,
+    onChange: function (selectedDates, dateStr, instance) {
+      const str = dateStr;
+      //var array_boxstr = str.split(" ");
+
+      var select = document.getElementById("selecter");
+      var selects = select.options;
+
+      for (i = 0; i < selects.length; i++) {
+        if (selects[i].selected == false) {
+          if (str == selects[i].value) {
+            document.getElementById('test').innerHTML = selects[i].value + " " + "入力済み";
+          }
+        } else {
+          document.getElementById('test').innerHTML = "";
+        }
+      }
+    },
+    wrap: true,
+    plugins: [new confirmDatePlugin({
+      confirmText: "決定",
+      showAlways: false,
+      theme: "light",
+
+    })],
+    onClose: function () {
+      document.getElementById('test').innerHTML = "";
+    }
+  }
+  flatpickr('.flatpickr', config);
+
+</script>
+
+</html>

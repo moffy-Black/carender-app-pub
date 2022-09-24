@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DELETE</title>
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+  <div id="theme">
+    <h1>Paper-Ganbaru</h1>
+  </div>
+
+  <div>
+    <a href="/"><button id="logout" class="material-icons">ログアウト</button></a>
+  </div>
+
+  <div class="wel">
+    <p>以下の予約を削除しました</p>
+    <p id="delete_user">ユーザ名:{{ name }}</p>
+    <p id="delete_time">時刻:{{ time }}</p>
+    <a href="/index"><button id="backbutton">戻る</button></a>
+  </div>
+
+</body>
+
+</html>

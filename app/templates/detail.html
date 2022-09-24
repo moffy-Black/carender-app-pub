@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DETAIL</title>
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+  <div id="theme">
+    <h1>Paper-Ganbaru</h1>
+  </div>
+
+  <div>
+    <a href="/"><button id="logout" class="material-icons">ログアウト</button></a>
+  </div>
+
+  <div class="wel">
+    <p>{{ name }}さんのスケジュール</p>
+    <ul id="detail_ul">
+      {% for time in times %}
+      <li>
+        <p id="usertime">{{ time.time }}</p>
+      </li>
+      <a href="/delete/{{name}}/{{time.time}}"><button id="backbutton">削除</button></a>
+      {% endfor %}
+    </ul>
+    <a href="/index"><button id="backbutton">戻る</button></a>
+  </div>
+
+</body>
+
+<script>
+  var usertime = document.getElementById("#usertime");
+  if (usertime == "") {
+    usertime.innerHTML = "予約はありません";
+  }
+
+</script>
+
+</html>
